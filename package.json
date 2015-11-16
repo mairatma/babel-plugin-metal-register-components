@@ -1,0 +1,36 @@
+{
+  "name": "babel-plugin-metal-register-components",
+  "version": "0.0.1",
+  "description": "A babel plugin for Metal.js that automatically registers components.",
+  "license": "MIT",
+  "repository": "mairatma/babel-plugin-metal-register-components",
+  "author": {
+    "name": "Maira Bello",
+    "email": "maira.araujo@liferay.com"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "coverage": "istanbul cover nodeunit -- test/test.js",
+    "lint": "jshint test/test.js index.js",
+    "test": "nodeunit test/test.js"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "metal"
+  ],
+  "dependencies": {
+    "babel-core": "^6.1.2"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.0",
+    "jshint": "^2.7.0",
+    "nodeunit": "^0.9.1"
+  }
+}
