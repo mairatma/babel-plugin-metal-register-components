@@ -29,8 +29,11 @@
     "babel-core": "^6.1.2"
   },
   "devDependencies": {
+    "babel-plugin-globals": "^1.0.1",
+    "babel-preset-es2015": "^6.1.18",
     "istanbul": "^0.4.0",
     "jshint": "^2.7.0",
-    "nodeunit": "^0.9.1"
+    "nodeunit": "^0.9.1",
+    "sinon": "^1.17.2"
   }
 }
