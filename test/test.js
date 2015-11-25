@@ -30,7 +30,7 @@ module.exports = {
     var code = 'class Foo {}\nexport default Foo;\nexport default Foo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.strictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent'));
+    assert.strictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent(Foo, "Foo")'));
     assert.strictEqual(0, global.Component.prototype.registerMetalComponent.callCount);
     test.done();
   },
@@ -39,7 +39,7 @@ module.exports = {
     var code = 'class Bar {}\nclass Foo extends Bar {}\nexport default Foo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.notStrictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent'));
+    assert.notStrictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent(Foo, "Foo")'));
     assert.strictEqual(0, global.Component.prototype.registerMetalComponent.callCount);
     test.done();
   },
@@ -48,7 +48,7 @@ module.exports = {
     var code = 'class Foo extends Component {}\nexport default Foo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.notStrictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent'));
+    assert.notStrictEqual(-1, result.code.indexOf('Foo.prototype.registerMetalComponent(Foo, "Foo")'));
     assert.strictEqual(1, global.myGlobals.Foo.prototype.registerMetalComponent.callCount);
     assert.strictEqual(global.myGlobals.Foo, global.myGlobals.Foo.prototype.registerMetalComponent.args[0][0]);
     test.done();
@@ -58,7 +58,7 @@ module.exports = {
     var code = 'var MyFoo = class Foo {}\nexport default MyFoo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.strictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent'));
+    assert.strictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent(MyFoo, "MyFoo")'));
     assert.strictEqual(0, global.Component.prototype.registerMetalComponent.callCount);
     test.done();
   },
@@ -67,7 +67,7 @@ module.exports = {
     var code = 'class Bar {}\nvar MyFoo = class Foo extends Bar {}\nexport default MyFoo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.notStrictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent'));
+    assert.notStrictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent(MyFoo, "MyFoo")'));
     assert.strictEqual(0, global.Component.prototype.registerMetalComponent.callCount);
     test.done();
   },
@@ -76,7 +76,7 @@ module.exports = {
     var code = 'var MyFoo = class Foo extends Component {}\nexport default MyFoo;';
     var result = babel.transform(code, babelOptions);
     eval.call(global, result.code);
-    assert.notStrictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent'));
+    assert.notStrictEqual(-1, result.code.indexOf('MyFoo.prototype.registerMetalComponent(MyFoo, "MyFoo")'));
     assert.strictEqual(1, global.myGlobals.Foo.prototype.registerMetalComponent.callCount);
     assert.strictEqual(global.myGlobals.Foo, global.myGlobals.Foo.prototype.registerMetalComponent.args[0][0]);
     test.done();

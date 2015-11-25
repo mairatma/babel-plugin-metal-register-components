@@ -18,7 +18,7 @@ module.exports = function(babel) {
     path.insertAfter(t.logicalExpression(
       '&&',
       fnId,
-      t.callExpression(fnId, [classId])
+      t.callExpression(fnId, [classId, t.stringLiteral(classId.name)])
     ));
   }
 
